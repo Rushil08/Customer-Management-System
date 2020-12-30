@@ -4,28 +4,29 @@ import datetime
 choice='y'
 
 try:               #checks for username and password
-    checker=0
+    checker=0    #CHANGE THE 0 TO 1 IF YOU WANT TO SKIP USERNAME/PASSWORD AUTHENTICTION
     uu=open('user','rb')
     zz=[]
-    while True:
+    while checker==0:
         try:
             zz.append(pickle.load(uu))
         except EOFError:
             break
-    pp=input('Enter Username: ')
-    for i in zz:
-        if pp==i[0]:
-            qq= input('Enter Password: ')
-            if qq==i[1]:
-                print()
-                print('Access Granted')
-                print()
-                checker=1
-                break
-            else:
-                print('Incorrect Password')
-                checker=2
-                break
+    if checker==0:
+        pp=input('Enter Username: ')
+        for i in zz:
+            if pp==i[0]:
+                qq= input('Enter Password: ')
+                if qq==i[1]:
+                    print()
+                    print('Access Granted')
+                    print()
+                    checker=1
+                    break
+                else:
+                    print('Incorrect Password')
+                    checker=2
+                    break
     if checker==0:
         print('Incorrect Username')
     uu.close()
